@@ -1,7 +1,30 @@
+//참고 : https://yeahajeong.tistory.com/219
+
+//buildscript{} → 해당 프로젝트의 플러그인 의존성 관리를 위한 설정
+buildscript {
+//	build.gradle에서 사용하는 전역변수 설정
+	ext {
+//		springBootVersion = '2.0.6.RELEASE'
+		springBootVersion = '2.4.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
 plugins {
+//	스프링 부트 사용
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+//	JAVA언어 사용
 	id 'java'
+//	이클립스 사용
+	id 'eclipse'
+//	myBatis 사용
+	id 'war'
 }
 
 group = 'com.jsb'
@@ -13,10 +36,38 @@ repositories {
 }
 
 dependencies {
+
+//	Spring MVC를 사용하는 RESTful 애플리케이션을 포함한 웹 구축 용 스타터 구성을 포함하고 있고, Tomcat을 기본 임베디드 컨테이너로 사용
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+//	mariaDB연동
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.2'
+
+//	Thymeleaf 뷰를 사용하여 MVC 웹 응용 프로그램을 작성하기 위한 의존성 → html로 설정 테스트 하기 위함.
+//	react 쓸거면 아래 코드 필요없음
+	compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+//	 Spring Boot 어플리케이션을 테스트하기 위한 스타터 구성
+	testCompile "org.springframework.boot:spring-boot-starter-test"
+
+//	lombok은 기본 생성자, getter와 setter 생성까지 한번에 해결해주는 것
+//	사용하기 위해선 marketPlace에서 lombok을 설치해주어야한다.
+//	VO클래스 상단에 @Data라는 어노테이션을 적어줘야 정상적으로 실행됨.
+//	참고: https://shlee0882.tistory.com/250?category=809647
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+//	myBatis사용
+//	참고: https://parksrazor.tistory.com/119
+//	아래는 하다가 말았음 mariaDB연동을 마무리 못해서... 일단 해보고...
+//	위에 참고랑 이것도 참고해볼까 싶음 : https://longbeom.tistory.com/104
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.3'
+
 }
+
 
 test {
 	useJUnitPlatform()
