@@ -3,7 +3,7 @@ package com.jsb.haf.model;
 import lombok.Data;
 
 @Data
-public class Board {
+public class BoardVO {
     int bcode;
     String id;
     String pcode;

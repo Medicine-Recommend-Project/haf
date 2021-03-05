@@ -3,7 +3,7 @@ package com.jsb.haf.model;
 import lombok.Data;
 
 @Data
-public class OrderDetail {
+public class OrderDetailVO {
     String ocode;
     String id;
     String pcode;
