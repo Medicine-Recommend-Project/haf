@@ -10,6 +10,7 @@ buildscript {
 	repositories {
 		mavenCentral()
 	}
+	//의존성 주입
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
@@ -57,8 +58,14 @@ dependencies {
 	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
 
 
-//	mariaDB연동
-	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.2'
+//	mysql연동
+
+	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+//entityManangerFacroty bean을 생성할 수 있도록 도와줌
+	// https://mvnrepository.com/artifact/org.javassist/javassist
+	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client-jre7:1.6.1'	// → 그냥 추가해봄
 	runtimeOnly 'mysql:mysql-connector-java'	// 이것도 그냥 추가해봄 힛
 
@@ -78,6 +85,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 
 //	myBatis사용
 //	참고: https://parksrazor.tistory.com/119
