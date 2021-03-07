@@ -6,6 +6,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### LOG 파일 저장 ###
+log
+log.config.path_IS_UNDEFINED
+
 ### STS ###
 .apt_generated
 .classpath
