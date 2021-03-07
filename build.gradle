@@ -28,7 +28,44 @@ plugins {
 	id 'idea'
 //	myBatis 사용
 	id 'war'
+//	React사용
+	id 'com.github.node-gradle.node' version '2.2.3'
 }
+
+//	참고 : https://blog.naver.com/PostView.nhn?blogId=qjawnswkd&logNo=222217933898&categoryNo=27&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=search
+node{
+	version = '14.16.0'
+	download = true
+	workDir = file("${project.projectDir}/src/main/frontend/nodejs")
+	npmWorkDir = file("${project.projectDir}/src/main/frontend/npm")
+	nodeModulesDir = file("${project.projectDir}/src/main/frontend")
+}
+task npmInstallDependencies(type:NpmTask){
+	dependsOn 'npmSetup'
+	execOverrides{
+		it.ignoreExitValue = true
+		it.workingDir = 'src/main/frontend'
+	}
+}
+
+task npmBuild(type: NpmTask){
+	dependsOn 'npmInstallDependencies'
+	execOverrides{
+		it.workingDir = 'src/main/frontend'
+	}
+	args = ['run', 'build']
+}
+
+task copyFrontendToBuild(type: Copy){
+	dependsOn 'npmBuild'
+	from "$projectDir/src/main/frontend/build/"
+	into "$buildDir/resources/main/static"
+}
+
+processResources{
+	dependsOn 'copyFrontendToBuild'
+}
+
 
 group = 'com.jsb'
 version = '0.0.1-SNAPSHOT'
@@ -46,20 +83,24 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor:2.4.3'
+//	 Spring Boot 어플리케이션을 테스트하기 위한 스타터 구성
+	testCompile "org.springframework.boot:spring-boot-starter-test"
 
 //	devTools
 	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.4.3'
 
-	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+//	 https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+//	 json 사용위한 plugin 추가
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-	// https://mvnrepository.com/artifact/commons-lang/commons-lang
-//	이거 추가하고나서 controller랑 view랑 연동된 것 같다??
+//	 https://mvnrepository.com/artifact/commons-lang/commons-lang
+//	이거 추가하고나서 controller랑 view랑 연동된 것 같다?? 뭔지는 잘 모르겠음...뀨
 	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
 
+//	콘솔 창에 log가 찍히게 하기 위해 추가함
+	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
 
 //	mysql연동
-
 	runtimeOnly 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
@@ -73,8 +114,7 @@ dependencies {
 //	react 쓸거면 아래 코드 필요없음
 	compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 
-//	 Spring Boot 어플리케이션을 테스트하기 위한 스타터 구성
-	testCompile "org.springframework.boot:spring-boot-starter-test"
+
 
 //	lombok 사용
 //	lombok은 기본 생성자, getter와 setter 생성까지 한번에 해결해주는 것

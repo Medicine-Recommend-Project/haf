@@ -14,6 +14,7 @@ import java.util.Enumeration;
 @Slf4j
 @Component
 public class LoggerInterceptor extends HandlerInterceptorAdapter {
+    /*
     // 재고관리 팀프로젝트 시 사용한 start end
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -31,7 +32,9 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
             log.info("======================================           END          ======================================\n");
         }
     }
-    /*
+     */
+
+//    /*
     //controller로 보내기 전 이벤트 작동(false - controller로 요청을 안함)
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -64,5 +67,5 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
         log.info("================================ END ================================");
     }
 
-     */
+//     */
 }
