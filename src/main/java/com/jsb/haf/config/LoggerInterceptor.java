@@ -36,6 +36,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
 //    /*
     //controller로 보내기 전 이벤트 작동(false - controller로 요청을 안함)
+    
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.debug("============================== START ==============================");
