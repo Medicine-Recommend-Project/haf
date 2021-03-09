@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class OrderDetailVO {
-    String ocode;
-    String id;
-    String pcode;
-    int quantity;
-    int totalPrice;
-    String odate;
+    private String ocode;
+    private String id;
+    private String pcode;
+    private int quantity;
+    private int totalPrice;
+    private String odate;
 
 }

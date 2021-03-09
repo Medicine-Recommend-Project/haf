@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <h2>This is Content</h2>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>pcode</th>
+            <th>pname</th>
+            <th>pprice</th>
+            <th>sales</th>
+            <th>review</th>
+            <th>pdate</th>
+        </tr>
+            <tr th:each="product : ${ProductList}">
+                <td th:text="${product.pcode}"</td>
+                <td th:text="${product.pname}"</td>
+                <td th:text="${product.pprice}"</td>
+                <td th:text="${product.sales}"</td>
+                <td th:text="${product.review}"</td>
+                <td th:text="${product.pdate}"</td>
+            </tr>
+    </table>
+</div>
+
+</body>
+</html>
