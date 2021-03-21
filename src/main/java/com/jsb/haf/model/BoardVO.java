@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class BoardVO {
-    int bcode;
-    String id;
-    String pcode;
-    String category;
-    String btitle;
-    String bcontent;
-    String bdate;
+    private int bcode;
+    private String id;
+    private String pcode;
+    private String category;
+    private String btitle;
+    private String bcontent;
+    private String bdate;
 
 }

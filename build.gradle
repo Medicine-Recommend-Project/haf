@@ -122,7 +122,9 @@ dependencies {
 
 //	Spring MVC를 사용하는 RESTful 애플리케이션을 포함한 웹 구축 용 스타터 구성을 포함하고 있고, Tomcat을 기본 임베디드 컨테이너로 사용
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile ("org.springframework.boot:spring-boot-starter-web:1.4.0.RELEASE") {
+		exclude module:'spring-boot-starter-logging'
+	}
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor:2.4.3'
 //	 Spring Boot 어플리케이션을 테스트하기 위한 스타터 구성
@@ -149,8 +151,6 @@ dependencies {
 //entityManangerFacroty bean을 생성할 수 있도록 도와줌
 	// https://mvnrepository.com/artifact/org.javassist/javassist
 	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client-jre7:1.6.1'	// → 그냥 추가해봄
-	runtimeOnly 'mysql:mysql-connector-java'	// 이것도 그냥 추가해봄 힛
 
 //	Thymeleaf 뷰를 사용하여 MVC 웹 응용 프로그램을 작성하기 위한 의존성 → html로 설정 테스트 하기 위함.
 //	react 쓸거면 아래 코드 필요없음
@@ -171,7 +171,6 @@ dependencies {
 
 //	myBatis사용
 //	참고: https://parksrazor.tistory.com/119
-//	아래는 하다가 말았음 mariaDB연동을 마무리 못해서... 일단 해보고...
 //	위에 참고랑 이것도 참고해볼까 싶음 : https://longbeom.tistory.com/104
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.3'
@@ -182,7 +181,10 @@ dependencies {
 // 타임리프 관련 의존성을 추가해주지 않으면 시큐리티 태그 sec 를 사용할 수 없다.
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
 
+//log4
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 
+	compile("com.h2database:h2")
 }
 
 

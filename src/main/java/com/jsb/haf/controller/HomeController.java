@@ -1,11 +1,18 @@
 package com.jsb.haf.controller;
 
+import com.jsb.haf.model.ProductVO;
+import com.jsb.haf.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Optional;
+
+
 
 @RequestMapping("/api")
 @RestController     // → @ResponseBody + @Controller
@@ -22,9 +29,17 @@ public class HomeController {
         return mv;
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "안녕하세요. 현재 서버시간은 "+new Date() +"입니다. \n";
-    }
+    @Autowired
+    ProductService productService;
 
+    @GetMapping("/home")
+    public ModelAndView goHome(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        List<ProductVO> ProductList = productService.getProduct();
+
+        mav.addObject("ProductList", ProductList);
+        mav.setViewName("content/home.html");
+
+            return mav;
+    }
 }

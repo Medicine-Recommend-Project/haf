@@ -3,10 +3,11 @@ import lombok.*;
 
 @Data
 public class ProductVO {
-    String pcode;
-    String pname;
-    int pprice;
-    int sales;
-    int review;
+  private String pcode;
+  private String pname;
+  private int pprice;
+  private int sales;
+  private int review;
+  private String pdate;
 
 }
