@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //      * 해당 경로에는 security 가 모두 무시할 수 있도록 설정
 //      * 기본 경로는 resources/static
         web.ignoring().antMatchers("/js/**", "/css/**", "/images/**", "/font/**", "/html/**");
-        web.ignoring().antMatchers("./templates/hi/**");
+        web.ignoring().antMatchers("./templates/**");
     }
 
 
@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //      * authorizeRequests() : request 에따라 접근 제어
         http.authorizeRequests()
 ///             ↓ admin 경로의 모든 경로는 ADMIN 권한 사용자만 접근 ↓
+                .antMatchers("/api/**").hasRole("")
                 .antMatchers("/admin/**").hasRole("ADMIN")
 //              ↓ 모든 경로에 권한없이 접근 가능 ↓
                 .antMatchers("/**").permitAll()

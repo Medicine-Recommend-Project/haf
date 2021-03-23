@@ -5,13 +5,14 @@ import lombok.Data;
 @Data
 public class CustomerVO {
 
-    private String id;
-    private String pw;
-    private String grade;
-    private String NAME;
-    private String email;
-    private int ph;
-    private String address;
-    private String joinDate;
+    private String cId;
+    private String cPw;
+    private String cGrade;
+    private String cName;
+    private String cEmail;
+    private int cPh;
+    private String cAddress;
+    private String cAddressDetail;
+    private String cJoinDate;
 
 }
