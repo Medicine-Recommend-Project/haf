@@ -34,19 +34,6 @@ public class HomeController {
         return "안녕 지금 한국 시간은 " + new Date() + "입니다용 \n" ;
     }
 
-    @Autowired
-    ProductService productService;
-
-    @GetMapping("/home")
-    public ModelAndView goHome(HttpServletRequest request){
-        ModelAndView mav = new ModelAndView();
-        List<ProductVO> ProductList = productService.getProduct();
-
-        mav.addObject("ProductList", ProductList);
-        mav.setViewName("content/home.html");
-
-        return mav;
-    }
 
     @GetMapping(value="/me")
     public String me(){

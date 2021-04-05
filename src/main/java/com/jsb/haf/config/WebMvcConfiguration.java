@@ -14,7 +14,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors (InterceptorRegistry registry) {
-        registry.addInterceptor(loggerInterceptor).excludePathPatterns("/assets/**");
+        registry.addInterceptor(loggerInterceptor).excludePathPatterns("/**");
     }
 
     /*
@@ -26,7 +26,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowCredentials(true).allowedOrigins("http://localhost:8008");
+//        registry.addMapping("/**").allowCredentials(true).allowedOrigins("http://localhost:8008");
         registry.addMapping("/**").allowedOrigins("http://localhost:3000");
     }
 }

@@ -3,7 +3,11 @@
 
 <mapper namespace="com.jsb.haf.mapper.CustomerMapper">
 <!--====== Select ======-->
-    
+    <select id="selectId" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM haf.customer
+        WHERE cId = #{cId}
+    </select>
 <!--====== Insert ======-->
 
 <!--====== Update ======-->

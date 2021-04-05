@@ -9,5 +9,4 @@ public class HafApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HafApplication.class, args);
 	}
-
 }
